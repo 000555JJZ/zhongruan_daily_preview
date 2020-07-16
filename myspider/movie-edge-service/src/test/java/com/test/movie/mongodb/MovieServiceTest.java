@@ -36,14 +36,14 @@ public class MovieServiceTest {
 
     @Test
     public void findByScore(){
-        List<Movie> movies = movieService.findMoviesByScore(9.7);
+        List<Movie> movies = movieService.findMoviesByScore(9.2);
         for (Movie movie : movies){
             System.out.println(movie.toString());
         }
     }
     @Test
     public void findBetweenScore(){
-        List<Movie> movies = movieService.findMoviesByScoreBetween(8, 10);
+        List<Movie> movies = movieService.findMoviesByScoreBetween(9, 10);
         for (Movie movie : movies){
             System.out.println(movie.toString());
         }
@@ -57,7 +57,7 @@ public class MovieServiceTest {
     }
     @Test
     public void countMoviesByScoreBetween(){
-        int temp = movieService.countMoviesByScoreBetween(8,8.35);
+        int temp = movieService.countMoviesByScoreBetween(9,10);
         System.out.println(temp);
     }
 }

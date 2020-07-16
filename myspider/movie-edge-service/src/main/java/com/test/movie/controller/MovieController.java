@@ -3,9 +3,6 @@ package com.test.movie.controller;
 
 //import com.test.movie.mongodb.Movie;
 
-import com.test.movie.echarts.ScoreData;
-import com.test.movie.mongodb.Movie;
-import com.test.movie.mongodb.MovieService;
 import com.test.movie.response.Response;
 import com.test.movie.thrift.ServiceProvider;
 import com.test.thrift.spider.SpiderService;
@@ -43,10 +40,20 @@ public class MovieController {
         }
         return Response.SUCCESS;
     }
+//    @RequestMapping(value = "/search",method = RequestMethod.GET)
+//    @ResponseBody
+//    public Response echarts(){
+//        MovieDao movieDao;
+//
+//        return null;
+//    }
 
 
-
-
-
-
+//    @Resource
+//    private MovieService movieService;
+//    @GetMapping("/mongomovie")
+//    public Movie getMongoMovie(){
+//        System.out.println(111);
+//        return movieService.findByRank(1);
+//    }
 }

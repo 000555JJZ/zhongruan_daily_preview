@@ -21,6 +21,5 @@ public interface MovieDao extends MongoRepository<Movie,Object>{
     List<Movie> findMoviesByScore(double score);
     List<Movie> findMoviesByDirector(String director);
     Page<Movie> findAll(Pageable pageable);
-    int countMoviesByScore(double score);
     int countMoviesByScoreBetween(double from ,double to);
 }
