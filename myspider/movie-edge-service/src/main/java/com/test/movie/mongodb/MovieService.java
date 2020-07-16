@@ -12,4 +12,5 @@ public interface MovieService {
     List<Movie> findMoviesByScoreBetween(double from,double to);
     List<Movie> findMoviesByDirector(String director);
     int countMoviesByScoreBetween(double from ,double to);
+    int countMoviesByScore(double score);
 }

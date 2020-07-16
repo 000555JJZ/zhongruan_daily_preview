@@ -54,4 +54,9 @@ public class MovieServiceImpl implements MovieService{
         return movieDao.countMoviesByScoreBetween(from, to);
     }
 
+    @Override
+    public int countMoviesByScore(double score) {
+        return movieDao.countMoviesByScore(score);
+    }
+
 }
