@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import pymongo
 
-client = pymongo.MongoClient('192.168.0.107')
+client = pymongo.MongoClient('192.168.0.108')
 db = client['spider']
 MONGO_TABLE = 'movie'
 
