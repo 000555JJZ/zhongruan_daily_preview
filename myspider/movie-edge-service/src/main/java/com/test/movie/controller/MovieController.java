@@ -44,6 +44,10 @@ public class MovieController {
         return Response.SUCCESS;
     }
 
+    @GetMapping("/information")
+    public String showMovieInfo(){
+        return "movie-show";
+    }
 
 
 

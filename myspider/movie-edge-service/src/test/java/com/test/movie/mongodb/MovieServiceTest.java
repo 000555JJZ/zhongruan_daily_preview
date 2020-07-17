@@ -43,7 +43,7 @@ public class MovieServiceTest {
     }
     @Test
     public void findBetweenScore(){
-        List<Movie> movies = movieService.findMoviesByScoreBetween(8, 10);
+        List<Movie> movies = movieService.findMoviesByScoreBetween(8,8.35);
         for (Movie movie : movies){
             System.out.println(movie.toString());
         }

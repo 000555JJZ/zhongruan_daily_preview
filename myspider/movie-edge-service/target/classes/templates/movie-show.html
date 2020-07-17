@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Movie-Show</title>
+    <!-- 引入 echarts.js -->
+    <!--    <script src="http://cdn.bootcss.com
+    /echarts/4.2.1-rc1/echarts.min.js"></script>-->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script src="/js/echarts.common.js"></script>
+    <script src=""></script>
+</head>
+<body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="charts1" style="width: 450px;height:300px;"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    function localDataAndShowData1() {
+        var myChart1 = echarts.init(document.getElementById('charts1'));
+
+        myChart1.setOption(
+            {
+                title: {
+                    text: '全部高分电影评分情况'
+                },
+                tooltip: {},
+                legend: {
+                    data:['数量']
+                },
+                xAxis: {
+                    data: []
+                },
+                dataZoom:[
+                    {
+                        type:'slider',
+                        start: 0,
+                        end: 60
+                    }
+                ],
+                yAxis: {},
+                series: [{
+                    name: '数量',
+                    type: 'bar',
+                    data: []
+                }]
+            }
+        );
+        // 指定图表的配置项和数据
+        myChart1.showLoading();
+        var names = [];
+        var nums = [];
+
+        $.ajax({
+            type: 'get',
+            url: '/remote/scoredata1',
+            dataType: 'json',
+            success: function (result) {
+
+                $.each(result ,function(index,item) {
+                    names.push(item.score);
+                    nums.push(item.count)
+                });
+                myChart1.hideLoading();
+                myChart1.setOption({
+                    xAxis:{
+                        data: names
+                    },
+                    series:[{
+                        data: nums
+                    }]
+                });
+            },
+            error: function (errorMessage) {
+                alert("data is error");
+                myChart1.hideLoading();
+            }
+        })
+
+    }
+
+    localDataAndShowData1();
+    // 使用刚指定的配置项和数据显示图表。
+</script>
+<div id="charts2" style="width: 450px;height:300px;"></div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    function localDataAndShowData2() {
+        var myChart2 = echarts.init(document.getElementById('charts2'));
+
+        myChart2.setOption(
+            {
+                title: {
+                    text: '9分以上电影评分情况'
+                },
+                tooltip: {},
+                legend: {
+                    data:['数量']
+                },
+                xAxis: {
+                    data: []
+                },
+                dataZoom:[
+                    {
+                        type:'slider',
+                        start: 0,
+                        end: 60
+                    }
+                ],
+                yAxis: {},
+                series: [{
+                    name: '数量',
+                    type: 'bar',
+                    data: []
+                }]
+            }
+        );
+        // 指定图表的配置项和数据
+        myChart2.showLoading();
+        var names = [];
+        var nums = [];
+
+        $.ajax({
+            type: 'get',
+            url: '/remote/scoredata2',
+            dataType: 'json',
+            success: function (result) {
+
+                $.each(result ,function(index,item) {
+                    names.push(item.score);
+                    nums.push(item.count)
+                });
+                myChart2.hideLoading();
+                myChart2.setOption({
+                    xAxis:{
+                        data: names
+                    },
+                    series:[{
+                        data: nums
+                    }]
+                });
+            },
+            error: function (errorMessage) {
+                alert("data is error");
+                myChart2.hideLoading();
+            }
+        })
+
+    }
+
+    localDataAndShowData2();
+    // 使用刚指定的配置项和数据显示图表。
+</script>
+</body>
+</html>

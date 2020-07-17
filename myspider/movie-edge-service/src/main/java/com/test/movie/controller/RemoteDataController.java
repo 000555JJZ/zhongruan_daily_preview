@@ -1,5 +1,6 @@
 package com.test.movie.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.test.movie.echarts.ScoreData;
 import com.test.movie.mongodb.Movie;
 import com.test.movie.mongodb.MovieService;
@@ -11,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-
-@RequestMapping("/remote")
 @RestController
+@RequestMapping("/remote")
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class RemoteDataController {
 
     @Resource
@@ -24,7 +25,7 @@ public class RemoteDataController {
         int data2=movieService.countMoviesByScoreBetween(8.35,8.65);
         int data3=movieService.countMoviesByScoreBetween(8.65,8.95);
         int data4=movieService.countMoviesByScoreBetween(8.95,9.25);
-        int data5=movieService.countMoviesByScoreBetween(9.25,8.55);
+        int data5=movieService.countMoviesByScoreBetween(9.25,9.55);
         int data6=movieService.countMoviesByScoreBetween(9.55,10);
         ScoreData scoreData1 = new ScoreData("8.0-8.3",data1);
         ScoreData scoreData2 = new ScoreData("8.4-8.6",data2);
