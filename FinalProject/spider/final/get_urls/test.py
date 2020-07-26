@@ -24,6 +24,7 @@ def get_headers():
 def get_single_data(url):
     global i
     wb_data = requests.get(url, headers=get_headers()).json()
+
     all_data = wb_data['data']
     try:
         single_data = {
@@ -44,7 +45,7 @@ def get_single_data(url):
             file.write('\n')
         except:
             print("write_json_wrong")
-        if i % 1000 == 0:
+        if i % 10 == 0:
             print(single_data)
         i = i + 1
     except:
@@ -56,6 +57,7 @@ def get_more(bvid):
     tag_string = ''
     url = 'https://www.bilibili.com/video/' + bvid
     wb_data = requests.get(url, headers=get_headers())
+
     soup = BeautifulSoup(wb_data.text, 'html.parser')
     name = soup.select_one('#viewbox_report > h1 > span').get_text()
     up_url = ''
@@ -73,7 +75,7 @@ def get_more(bvid):
     for tag in tags:
         j = j + 1
         if j < tags.__len__():
-            tag_string = tag_string + tag.get_text() + ','
+            tag_string = tag_string + tag.get_text() + ':::'
         else:
             tag_string = tag_string + tag.get_text()
     data_add = {
@@ -87,9 +89,9 @@ def get_more(bvid):
 
 
 if __name__ == '__main__':
-    file = open('../urls/pre_data.json', 'w', encoding='utf-8')
-    file.truncate()
-    urls = ['https://api.bilibili.com/x/web-interface/archive/stat?aid={}'.format(num) for num in range(1, 100001)]
+    file = open('../urls/pre_data.json', 'a', encoding='utf-8')
+    # file.truncate()
+    urls = ['https://api.bilibili.com/x/web-interface/archive/stat?aid={}'.format(num) for num in range(130158, 150000)]
     for url in urls:
         get_single_data(url)
     file.close()

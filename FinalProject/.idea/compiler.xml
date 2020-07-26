@@ -7,14 +7,18 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="bilibili-thrift-service" />
+        <module name="bilibili-thrift-radar2D-service" />
         <module name="bilibili-edge-service" />
         <module name="bilibili-thrift-service-api" />
+        <module name="bilibili-thrift-relation-service" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="bilibili-edge-service" options="-parameters" />
+      <module name="bilibili-thrift-radar2D-service" options="-parameters" />
+      <module name="bilibili-thrift-relation-service" options="-parameters" />
       <module name="bilibili-thrift-service" options="-parameters" />
     </option>
   </component>

@@ -2,6 +2,8 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/bilibili-edge-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bilibili-thrift-radar2D-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bilibili-thrift-relation-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bilibili-thrift-service/src/main/java" charset="UTF-8" />
   </component>
 </project>

@@ -12,6 +12,8 @@
         <module>bilibili-thrift-service-api</module>
         <module>bilibili-thrift-service</module>
         <module>bilibili-edge-service</module>
+        <module>bilibili-thrift-radar2D-service</module>
+        <module>bilibili-thrift-relation-service</module>
     </modules>
 
 

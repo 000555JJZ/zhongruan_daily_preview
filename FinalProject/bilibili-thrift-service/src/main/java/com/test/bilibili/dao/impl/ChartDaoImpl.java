@@ -29,7 +29,6 @@ public class ChartDaoImpl implements ChartDao {
         try {
             List<String> key = new ArrayList<>();
             List<Long> value = new ArrayList<>();
-
             HDFSUtils.getHDFSFileInfoToChart("hdfs://master:9000/output/wc/part-r-00000",key,value);
             ChartInfo chartInfo = new ChartInfo(key,value);
             return chartInfo;
@@ -67,6 +66,46 @@ public class ChartDaoImpl implements ChartDao {
 
     @Override
     public ChartInfo getChartInfoPart8() {
+        return null;
+    }
+
+    @Override
+    public ChartInfo getChartInfoPart9() {
+        return null;
+    }
+
+    @Override
+    public ChartInfo getChartInfoPart10() {
+        return null;
+    }
+
+    @Override
+    public ChartInfo getChartInfoPart11() {
+        return null;
+    }
+
+    @Override
+    public ChartInfo getChartInfoPart12() {
+        return null;
+    }
+
+    @Override
+    public ChartInfo getChartInfoPart13() {
+        return null;
+    }
+
+    @Override
+    public ChartInfo getChartInfoPart14() {
+        return null;
+    }
+
+    @Override
+    public ChartInfo getChartInfoPart15() {
+        return null;
+    }
+
+    @Override
+    public ChartInfo getChartInfoPart16() {
         return null;
     }
 }
