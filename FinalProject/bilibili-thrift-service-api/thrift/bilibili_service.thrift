@@ -39,7 +39,7 @@ service ChartServiceRadar2D {
 
 struct ChartInfoRelation {
     1:list<string> key,
-    2:list<string> value,
+    2:list<i64> value,
     3:list<i32> category,
     4:list<string> source,
     5:list<string> target

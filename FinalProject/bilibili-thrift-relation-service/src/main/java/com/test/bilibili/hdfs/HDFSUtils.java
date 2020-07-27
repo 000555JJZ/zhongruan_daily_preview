@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
+import java.util.Random;
 
 public class HDFSUtils {
     static {
@@ -19,7 +20,8 @@ public class HDFSUtils {
             System.setProperty("hadoop.home.dir","D:/learning/hadoop/winutils-master/hadoop-3.0.0");
     }
 
-    public static void getHDFSFileInfoToRelationChart(String hdfsURL, List<String> key , List<Long> value) throws IOException {
+    public static void getHDFSFileInfoToRelationChart(
+            String hdfsURL, List<String> key , List<Long> value,List<Integer> category, List<String> source, List<String> target) throws IOException {
 
         URL url = new URL(hdfsURL);
         URLConnection urlConnection = url.openConnection();
@@ -30,11 +32,20 @@ public class HDFSUtils {
 
         while ((buffer = br.readLine())!= null){
             String[] fields = buffer.split("\t");
-            key.add(fields[0]);
-            value.add(Long.valueOf(fields[1]));
+            String[] keys = fields[0].split("&");
+            for (String oneKey : keys){
+                if (key.contains(oneKey)){
+                    value.set(key.indexOf(oneKey),value.get(key.indexOf(oneKey)) + Integer.parseInt(fields[1])/2);
+                }
+                else {
+                    key.add(oneKey);
+                    value.add(Long.valueOf(fields[1])/2);
+                    category.add(new Random().nextInt(5)+1);
+                }
+            }
+            source.add(keys[0]);
+            target.add(keys[1]);
         }
         br.close();isr.close();is.close();
-
     }
-
 }

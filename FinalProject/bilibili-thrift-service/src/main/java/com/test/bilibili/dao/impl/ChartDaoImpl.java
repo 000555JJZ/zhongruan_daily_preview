@@ -13,13 +13,16 @@ import java.util.List;
 public class ChartDaoImpl implements ChartDao {
     @Override
     public ChartInfo getChartInfoPart1() {
-        List<String> key = new ArrayList<>();
-        List<Long> value = new ArrayList<>();
-        key.add("123");
-        key.add("456");
-        value.add((long) 123);
-        value.add((long) 456);
-        return new ChartInfo(key,value);
+        try {
+            List<String> key = new ArrayList<>();
+            List<Long> value = new ArrayList<>();
+            HDFSUtils.getHDFSFileInfoToChart("hdfs://master:9000/output/finalproject/question1/big-partition",key,value);
+            ChartInfo chartInfo = new ChartInfo(key,value);
+            return chartInfo;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
 
     }
 
@@ -29,7 +32,7 @@ public class ChartDaoImpl implements ChartDao {
         try {
             List<String> key = new ArrayList<>();
             List<Long> value = new ArrayList<>();
-            HDFSUtils.getHDFSFileInfoToChart("hdfs://master:9000/output/wc/part-r-00000",key,value);
+            HDFSUtils.getHDFSFileInfoToChart("hdfs://master:9000/output/finalproject/question1/small-partition",key,value);
             ChartInfo chartInfo = new ChartInfo(key,value);
             return chartInfo;
         } catch (IOException e) {
@@ -41,27 +44,72 @@ public class ChartDaoImpl implements ChartDao {
 
     @Override
     public ChartInfo getChartInfoPart3() {
-        return null;
+        try {
+            List<String> key = new ArrayList<>();
+            List<Long> value = new ArrayList<>();
+            HDFSUtils.getHDFSFileInfoToChart("hdfs://master:9000/output/finalproject/question1/tig-partition",key,value);
+            ChartInfo chartInfo = new ChartInfo(key,value);
+            return chartInfo;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public ChartInfo getChartInfoPart4() {
-        return null;
+        try {
+            List<String> key = new ArrayList<>();
+            List<Long> value = new ArrayList<>();
+            HDFSUtils.getHDFSFileInfoToChart("hdfs://master:9000/output/wc/part-r-00000",key,value);
+            ChartInfo chartInfo = new ChartInfo(key,value);
+            return chartInfo;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public ChartInfo getChartInfoPart5() {
-        return null;
+        try {
+            List<String> key = new ArrayList<>();
+            List<Long> value = new ArrayList<>();
+            HDFSUtils.getHDFSFileInfoToChart("hdfs://master:9000/output/wc/part-r-00000",key,value);
+            ChartInfo chartInfo = new ChartInfo(key,value);
+            return chartInfo;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public ChartInfo getChartInfoPart6() {
-        return null;
+        try {
+            List<String> key = new ArrayList<>();
+            List<Long> value = new ArrayList<>();
+            HDFSUtils.getHDFSFileInfoToChart("hdfs://master:9000/output/wc/part-r-00000",key,value);
+            ChartInfo chartInfo = new ChartInfo(key,value);
+            return chartInfo;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public ChartInfo getChartInfoPart7() {
-        return null;
+        try {
+            List<String> key = new ArrayList<>();
+            List<Long> value = new ArrayList<>();
+            HDFSUtils.getHDFSFileInfoToChart("hdfs://master:9000/output/wc/part-r-00000",key,value);
+            ChartInfo chartInfo = new ChartInfo(key,value);
+            return chartInfo;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

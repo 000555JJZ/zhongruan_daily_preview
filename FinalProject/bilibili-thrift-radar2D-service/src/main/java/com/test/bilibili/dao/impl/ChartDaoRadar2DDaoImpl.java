@@ -1,9 +1,11 @@
 package com.test.bilibili.dao.impl;
 
 import com.test.bilibili.dao.ChartRadar2DDao;
+import com.test.bilibili.hdfs.HDFSUtils;
 import com.test.thrift.bilibili.ChartInfoRadar2D;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,21 @@ import java.util.List;
 public class ChartDaoRadar2DDaoImpl implements ChartRadar2DDao {
     @Override
     public ChartInfoRadar2D getChartInfoRadar2DPart1() {
+
+        try {
+            List<String> key = new ArrayList<>();
+            List<List<Long>> value = new ArrayList<>();
+            HDFSUtils.getHDFSFileInfoToRadarChart("hdfs://master:9000/output/finalproject/question1/tig-radar",key,value);
+            ChartInfoRadar2D chartInfoRadar2D = new ChartInfoRadar2D(key,value);
+            return chartInfoRadar2D;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public ChartInfoRadar2D getChartInfoRadar2DPart2() {
         List<String> key = new ArrayList<>();
         List<List<Long>> value = new ArrayList<>();
         key.add("北京");key.add("上海");key.add("天津");
@@ -23,11 +40,6 @@ public class ChartDaoRadar2DDaoImpl implements ChartRadar2DDao {
         value.add(value1);value.add(value2);value.add(value3);
         ChartInfoRadar2D test= new ChartInfoRadar2D(key,value);
         return test;
-    }
-
-    @Override
-    public ChartInfoRadar2D getChartInfoRadar2DPart2() {
-        return null;
     }
 
     @Override

@@ -23,7 +23,7 @@ public class RemoteDataController {
     @Resource
     private ServiceProvider serviceProvider;
 
-    @GetMapping("/data1")
+    @GetMapping("/question1/data1")
     public ChartDTO getChartInfo1(){
         ChartService.Iface chartService = serviceProvider.getChartService();
         ChartInfo chartInfo = null;
@@ -36,7 +36,7 @@ public class RemoteDataController {
         ChartDTO chartDTO = ConvertDTO.toChartDTO(chartInfo);
         return chartDTO;
     }
-    @GetMapping("/data2")
+    @GetMapping("/question1/data2")
     public ChartDTO getChartInfo2(){
         ChartService.Iface chartService = serviceProvider.getChartService();
         ChartInfo chartInfo = null;
@@ -49,9 +49,21 @@ public class RemoteDataController {
         ChartDTO chartDTO = ConvertDTO.toChartDTO(chartInfo);
         return chartDTO;
     }
+    @GetMapping("/question1/data3")
+    public ChartDTO getChartInfo3(){
+        ChartService.Iface chartService = serviceProvider.getChartService();
+        ChartInfo chartInfo = null;
+        try {
+            chartInfo = chartService.getChartInfoPart3();
+        } catch (TException e) {
+            e.printStackTrace();
+            return null;
+        }
+        ChartDTO chartDTO = ConvertDTO.toChartDTO(chartInfo);
+        return chartDTO;
+    }
 
-
-    @GetMapping("/radar-data1")
+    @GetMapping("/question1/radar-data1")
     public ChartRadar2DDTO getRadarChartInfo1(){
         ChartServiceRadar2D.Iface chartServiceRadar2D = serviceProvider.getRadarChartService();
         ChartInfoRadar2D chartInfoRadar2D = null;
@@ -64,8 +76,36 @@ public class RemoteDataController {
         ChartRadar2DDTO chartRadar2DDTO = ConvertRadar2DDTO.toChartRadarDTO(chartInfoRadar2D);
         return chartRadar2DDTO;
     }
+    @GetMapping("/question1/radar-data2")
+    public ChartRadar2DDTO getRadarChartInfo2(){
+        ChartServiceRadar2D.Iface chartServiceRadar2D = serviceProvider.getRadarChartService();
+        ChartInfoRadar2D chartInfoRadar2D = null;
+        try {
+            chartInfoRadar2D = chartServiceRadar2D.getChartInfoRadar2DPart2();
+        } catch (TException e) {
+            e.printStackTrace();
+            return null;
+        }
+        ChartRadar2DDTO chartRadar2DDTO = ConvertRadar2DDTO.toChartRadarDTO(chartInfoRadar2D);
+        return chartRadar2DDTO;
+    }
+    @GetMapping("/question1/radar-data3")
+    public ChartRadar2DDTO getRadarChartInfo3(){
+        ChartServiceRadar2D.Iface chartServiceRadar2D = serviceProvider.getRadarChartService();
+        ChartInfoRadar2D chartInfoRadar2D = null;
+        try {
+            chartInfoRadar2D = chartServiceRadar2D.getChartInfoRadar2DPart3();
+        } catch (TException e) {
+            e.printStackTrace();
+            return null;
+        }
+        ChartRadar2DDTO chartRadar2DDTO = ConvertRadar2DDTO.toChartRadarDTO(chartInfoRadar2D);
+        return chartRadar2DDTO;
+    }
 
-    @GetMapping("/relation-data1")
+
+
+    @GetMapping("/question2/relation-data1")
     public ChartRelationDTO getRelationChartInfo1(){
         ChartServiceRelation.Iface chartServiceRelation = serviceProvider.getRelationChartService();
         ChartInfoRelation chartInfoRelation = null;
@@ -78,4 +118,60 @@ public class RemoteDataController {
         ChartRelationDTO chartRelationDTO = ConvertRelationDTO.toChartRelationDTO(chartInfoRelation);
         return  chartRelationDTO;
     }
+
+    @GetMapping("/question3/data4")
+    public ChartDTO getChartInfo4(){
+        ChartService.Iface chartService = serviceProvider.getChartService();
+        ChartInfo chartInfo = null;
+        try {
+            chartInfo = chartService.getChartInfoPart5();
+        } catch (TException e) {
+            e.printStackTrace();
+            return null;
+        }
+        ChartDTO chartDTO = ConvertDTO.toChartDTO(chartInfo);
+        return chartDTO;
+    }
+
+    @GetMapping("/question3/data5")
+    public ChartDTO getChartInfo5(){
+        ChartService.Iface chartService = serviceProvider.getChartService();
+        ChartInfo chartInfo = null;
+        try {
+            chartInfo = chartService.getChartInfoPart5();
+        } catch (TException e) {
+            e.printStackTrace();
+            return null;
+        }
+        ChartDTO chartDTO = ConvertDTO.toChartDTO(chartInfo);
+        return chartDTO;
+    }
+
+    @GetMapping("/question4/data6")
+    public ChartDTO getChartInfo6(){
+        ChartService.Iface chartService = serviceProvider.getChartService();
+        ChartInfo chartInfo = null;
+        try {
+            chartInfo = chartService.getChartInfoPart6();
+        } catch (TException e) {
+            e.printStackTrace();
+            return null;
+        }
+        ChartDTO chartDTO = ConvertDTO.toChartDTO(chartInfo);
+        return chartDTO;
+    }
+    @GetMapping("/question4/data7")
+    public ChartDTO getChartInfo7(){
+        ChartService.Iface chartService = serviceProvider.getChartService();
+        ChartInfo chartInfo = null;
+        try {
+            chartInfo = chartService.getChartInfoPart7();
+        } catch (TException e) {
+            e.printStackTrace();
+            return null;
+        }
+        ChartDTO chartDTO = ConvertDTO.toChartDTO(chartInfo);
+        return chartDTO;
+    }
+
 }

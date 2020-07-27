@@ -5,12 +5,12 @@ import java.util.List;
 
 public class ChartRelationDTO implements Serializable {
     private List<String> key;
-    private List<String> value;
+    private List<Long> value;
     private List<Integer> category;
     private List<String> source;
     private List<String> target;
 
-    public ChartRelationDTO(List<String> key, List<String> value, List<Integer> category, List<String> source, List<String> target) {
+    public ChartRelationDTO(List<String> key, List<Long> value, List<Integer> category, List<String> source, List<String> target) {
         this.key = key;
         this.value = value;
         this.category = category;
@@ -29,11 +29,11 @@ public class ChartRelationDTO implements Serializable {
         this.key = key;
     }
 
-    public List<String> getValue() {
+    public List<Long> getValue() {
         return value;
     }
 
-    public void setValue(List<String> value) {
+    public void setValue(List<Long> value) {
         this.value = value;
     }
 
