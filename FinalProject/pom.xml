@@ -14,6 +14,7 @@
         <module>bilibili-edge-service</module>
         <module>bilibili-thrift-radar2D-service</module>
         <module>bilibili-thrift-relation-service</module>
+        <module>bilibili-hdfs-service</module>
     </modules>
 
 

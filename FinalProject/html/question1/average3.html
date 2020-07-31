@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+</head>
+<body >
+    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="main" style="width: 700px;height: 400px; margin:0 auto;"></div>
+
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        function localDataAndShow() {
+            var myChart = echarts.init(document.getElementById('main'));
+            // 使用刚指定的配置项和数据显示图表。
+            var option = {
+                tooltip: {
+                    trigger: 'axis'
+                },
+                xAxis: [
+                    //上面那行
+                    {
+                        axisLabel:{
+                            interval: 0,
+                            show: false,
+                            rotate: 40,
+                        },
+                        type: 'category',
+                        boundaryGap: true,
+                        data: []
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value',
+                        scale: true,
+                        name: 'Average',
+                        max: 160000,
+                        min: 0,
+                        nameTextStyle: {
+                            fontSize: 24
+                        },
+                        axisLabel:{
+                            textStyle: {
+                                color: '#777777',  //更改坐标轴文字颜色
+                            },
+                            fontSize : 15, //更改坐标轴文字大小
+                            fontFamily: 'Georgia'
+                        },
+                        boundaryGap:[0.2, 0.2]
+                    }
+                ],
+                dataZoom:[
+                    {
+                        type: 'slider',
+                        start: 0,
+                        end: 60
+                    }
+                ],
+                series: [
+                    {
+                        name: 'Average',
+                        type: 'line',
+                        color: '#FF0000',
+                        xAxisIndex: 0,
+                        yAxisIndex: 0,
+                        data: [],
+                        areaStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: '#FF4500'
+                            }, {
+                                offset: 1,
+                                color: '#FF7F50'
+                            }])
+                        },
+                    }
+                ]
+            };
+            myChart.setOption(option);
+            myChart.showLoading();
+            // 2. 填充数据 = 数据从本地的json数据文件中获取
+            var listKey = [];
+            var listValue = [];
+            var dataArray = [];
+            $.ajax({
+                type : 'get',
+                url : '/json/smallarea.json',
+                dataType: "json",
+                success : function(result) {
+                    $.each(result, function (arrayName, array) {
+                        if (arrayName == "key"){
+                            listKey = array
+                        }
+                        if (arrayName == "value"){
+                            listValue = array
+                        }
+                    });
+                    myChart.hideLoading();
+                    myChart.setOption({
+                        xAxis: [
+                            {
+                                data: listKey
+                            }
+                        ],
+                        series: [
+                            {
+                                data: listValue
+                            }
+                        ]
+                    });
+                },
+                error :  function(errorMessage) {
+                    alert("Data is Error");
+                    myChart.hideLoading();
+                },
+            });
+        }
+        localDataAndShow()
+    </script>
+</body>
+</html>

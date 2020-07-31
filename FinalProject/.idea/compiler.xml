@@ -6,9 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="bilibili-edge-service" />
         <module name="bilibili-thrift-service" />
         <module name="bilibili-thrift-radar2D-service" />
-        <module name="bilibili-edge-service" />
+        <module name="bilibili-hdfs-service" />
         <module name="bilibili-thrift-service-api" />
         <module name="bilibili-thrift-relation-service" />
       </profile>

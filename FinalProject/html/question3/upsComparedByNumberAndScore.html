@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+</head>
+<body>
+<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="main1" style="width: 600px;height: 400px; margin: 0 auto"></div>
+    <div id="main2" style="width: 600px;height: 400px; margin: 0 auto"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        function localDataAndShow1() {
+            var myChart = echarts.init(document.getElementById('main1'));
+            // 使用刚指定的配置项和数据显示图表。
+            option = {
+                title: {
+                    text: '大up和小up对比-Number',
+                    subtext: '',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{a} <br/>{b} : {c} ({d}%)'
+                },
+                legend: {
+                    left: 'center',
+                    top: 'bottom',
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        mark: {show: true},
+                        dataView: {show: true, readOnly: false},
+                        magicType: {
+                            show: true,
+                            type: ['pie', 'funnel']
+                        },
+                        restore: {show: true},
+                        saveAsImage: {show: true}
+                    }
+                },
+                series: [
+                    {
+                        name: '半径模式',
+                        type: 'pie',
+                        radius: [50, 110],
+                        center: ['50%', '50%'],
+                        roseType: 'radius',
+                        label: {
+                            show: false
+                        },
+                        emphasis: {
+                            label: {
+                                show: true
+                            }
+                        },
+                        color: ['#7FFFAA','#9370DB']
+                    },
+                    {
+                        name: '面积模式',
+                        type: 'pie',
+                        radius: [100, 220],
+                        center: ['1175%', '1150%'],
+                        roseType: 'area',
+                        color: ['#7FFFAA', '#FFB6C1', '#EE82EE', '#7B68EE', '#6495ED', '#FFD700','#FF7F50','#FF4500', '#7CFC00', '#B0E0E6']
+                    }
+                ]
+            };
+            myChart.setOption(option);
+            myChart.showLoading();
+            // 2. 填充数据 = 数据从本地的json数据文件中获取
+            var listKey = [];
+            var listValue = [];
+            var dataArray = [];
+            $.ajax({
+                type : 'get',
+                url : '/json/question3_1.json',
+                dataType: "json",
+                success : function(result) {
+                    $.each(result, function (arrayName, array) {
+                        if (arrayName == "key")
+                            listKey = array
+                        if (arrayName == "value")
+                            listValue = array
+                        if (listValue.length > 0 && listKey.length > 0) {
+                            $.each(listValue, function (index, value) {
+                                var dictData = {}
+                                dictData['value'] = listValue[index]
+                                dictData['name'] = listKey[index]
+                                dataArray.push(dictData)
+                            })
+                        }
+                    });
+                    myChart.hideLoading();
+                    myChart.setOption({
+                        // 填充数据
+                        legend: {
+                            data: listKey
+                        },
+                        series: [
+                            {
+                                name: '半径模式',
+                                data: dataArray
+                            },
+                            {
+                                name: '面积模式',
+                                data: dataArray
+                            }
+                        ]
+                    });
+                },
+                error :  function(errorMessage) {
+                    alert("Data is Error");
+                    myChart.hideLoading();
+                },
+            });
+        }
+        function localDataAndShow2() {
+            var myChart = echarts.init(document.getElementById('main2'));
+            // 使用刚指定的配置项和数据显示图表。
+            option = {
+                title: {
+                    text: '大up和小up对比-Score',
+                    subtext: '',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{a} <br/>{b} : {c} ({d}%)'
+                },
+                legend: {
+                    left: 'center',
+                    top: 'bottom',
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        mark: {show: true},
+                        dataView: {show: true, readOnly: false},
+                        magicType: {
+                            show: true,
+                            type: ['pie', 'funnel']
+                        },
+                        restore: {show: true},
+                        saveAsImage: {show: true}
+                    }
+                },
+                series: [
+                    {
+                        name: '半径模式',
+                        type: 'pie',
+                        radius: [50, 110],
+                        center: ['50%', '50%'],
+                        roseType: 'radius',
+                        label: {
+                            show: false
+                        },
+                        emphasis: {
+                            label: {
+                                show: true
+                            }
+                        },
+                        color: ['#FFD700','#FF7F50']
+                    },
+                    {
+                        name: '面积模式',
+                        type: 'pie',
+                        radius: [100, 220],
+                        center: ['1175%', '1150%'],
+                        roseType: 'area',
+                        color: ['#7FFFAA', '#FFB6C1', '#EE82EE', '#7B68EE', '#6495ED', '#FFD700','#FF7F50','#FF4500', '#7CFC00', '#B0E0E6']
+                    }
+                ]
+            };
+            myChart.setOption(option);
+            myChart.showLoading();
+            // 2. 填充数据 = 数据从本地的json数据文件中获取
+            var listKey = [];
+            var listValue = [];
+            var dataArray = [];
+            $.ajax({
+                type : 'get',
+                url : '/json/question3_2.json',
+                dataType: "json",
+                success : function(result) {
+                    $.each(result, function (arrayName, array) {
+                        if (arrayName == "key")
+                            listKey = array
+                        if (arrayName == "value")
+                            listValue = array
+                        if (listValue.length > 0 && listKey.length > 0) {
+                            $.each(listValue, function (index, value) {
+                                var dictData = {}
+                                dictData['value'] = listValue[index]
+                                dictData['name'] = listKey[index]
+                                dataArray.push(dictData)
+                            })
+                        }
+                    });
+                    myChart.hideLoading();
+                    myChart.setOption({
+                        // 填充数据
+                        legend: {
+                            data: listKey
+                        },
+                        series: [
+                            {
+                                name: '半径模式',
+                                data: dataArray
+                            },
+                            {
+                                name: '面积模式',
+                                data: dataArray
+                            }
+                        ]
+                    });
+                },
+                error :  function(errorMessage) {
+                    alert("Data is Error");
+                    myChart.hideLoading();
+                },
+            });
+        }
+        localDataAndShow1()
+        localDataAndShow2()
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+</head>
+<body >
+<!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+<div id="main" style="width: 700px;height: 400px; margin:0 auto;"></div>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    function localDataAndShow() {
+        var myChart = echarts.init(document.getElementById('main'));
+        // 使用刚指定的配置项和数据显示图表。
+        var option = {
+            xAxis: {
+                type: 'category',
+            },
+            yAxis: {
+                type: 'value'
+            },
+            dataZoom:[
+                {
+                    type: 'slider',
+                    start: 0,
+                    end: 60
+                }
+            ],
+            series: [{
+                type: 'bar',
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(
+                        0, 0, 0, 1,
+                        [
+                            {offset: 0, color: '#FFFF00'},
+                            {offset: 0.5, color: '#FFD700'},
+                            {offset: 1, color: '#FFA500'},
+                        ]
+                    )
+                },
+            }]
+        };
+        myChart.setOption(option);
+        myChart.showLoading();
+        // 2. 填充数据 = 数据从本地的json数据文件中获取
+        var listKey = [];
+        var listValue = [];
+        $.ajax({
+            type : 'get',
+            url : '/remote/question1/data2',
+            dataType: "json",
+            success : function(result) {
+                $.each(result, function (arrayName, array) {
+                    if (arrayName == "key"){
+                        listKey = array
+                    }
+                    if (arrayName == "value"){
+                        listValue = array
+                    }
+                });
+                myChart.hideLoading();
+                myChart.setOption({
+                    xAxis: [
+                        {
+                            data: listKey
+                        }
+                    ],
+                    series: [
+                        {
+                            data: listValue
+                        }
+                    ]
+                });
+            },
+            error :  function(errorMessage) {
+                alert("Data is Error");
+                myChart.hideLoading();
+            },
+        });
+    }
+    localDataAndShow()
+</script>
+</body>
+</html>

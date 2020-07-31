@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Echarts Embbed</title>
+    <script src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+</head>
+    <body>
+    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="main" style="width: 600px;height: 400px; margin:0 auto;"></div>
+    <script type="text/javascript">
+        function localDataAndShow() {
+            var myChart = echarts.init(document.getElementById('main'));
+
+            var lineStyle = {
+                normal: {
+                    width: 1,
+                    opacity: 0.5
+                }
+            };
+
+            option = {
+                backgroundColor: '#FDF5E6',
+                title: {
+                    left: 'center',
+                    textStyle: {
+                        color: '#FDF5E6'
+                    }
+                },
+                legend: {
+                    bottom: 5,
+                    itemGap: 20,
+                    textStyle: {
+                        color: '#FF4500',
+                        fontSize: 14
+                    },
+                    selectedMode: 'single'
+                },
+                radar: {
+                    indicator: [
+                        {name: '播放量', max: 1000000},
+                        {name: '点赞数', max: 100000},
+                        {name: '弹幕数', max: 500000},
+                        {name: '评论数', max: 30000},
+                        {name: '收藏数', max: 1000000},
+                        {name: '硬币数', max: 50000},
+                        {name: '分享数', max: 150000},
+                    ],
+                    shape: 'circle',
+                    splitNumber: 5,
+                    // 七组字
+                    name: {
+                        textStyle: {
+                            color: '#FF4500'
+                        }
+                    },
+                    // 圈
+                    splitLine: {
+                        lineStyle: {
+                            color: [
+                                '#FFA07A', '#FFA07A',
+                                '#FFA07A', '#FFA07A',
+                                '#FFA07A', '#FFA07A'
+                            ].reverse()
+                        }
+                    },
+                    splitArea: {
+                        show: false
+                    },
+                    axisLine: {
+                        // 七条线的颜色
+                        lineStyle: {
+                            color: '#FF4500'
+                        }
+                    }
+                },
+                series: [
+                    {
+                        name: 'radar_data2',
+                        type: 'radar',
+                        lineStyle: lineStyle,
+                        symbol: 'none',
+                        itemStyle: {
+                            color: '#FF4500'
+                        },
+                        areaStyle: {
+                            opacity: 0.1
+                        }
+                    },
+                ]
+            };
+            myChart.setOption(option)
+            myChart.showLoading();
+            // 2. 填充数据 = 数据从本地的json数据文件中获取
+            var listKey = [];
+            var listValue = [];
+            $.ajax({
+                type : 'get',
+                url : '/remote/question1/radar-data2',
+                dataType: "json",
+                success : function(result) {
+                    $.each(result, function (arrayName, array) {
+                        //alert("第一层"+arrayName)
+                        //alert("第一层数组"+array)
+                        if (arrayName == "key")
+                            listKey = array
+                        if (arrayName == "value")
+                            listValue = array
+                    });
+                    myChart.hideLoading();
+                    myChart.setOption({
+                        // 填充数据
+                        series: [{
+                            data: listValue,
+                        }],
+                        legend: {
+                            data: listKey,
+                        }
+                    });
+                },
+                error :  function(errorMessage) {
+                    alert("Data is Error");
+                    myChart.hideLoading();
+                },
+            });
+        }
+        localDataAndShow();
+    </script>
+</body>
+</html>
