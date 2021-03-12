@@ -45,7 +45,7 @@
         <dependency>
             <groupId>org.apache.thrift</groupId>
             <artifactId>libthrift</artifactId>
-            <version>0.13.0</version>
+            <version>0.14.0</version>
         </dependency>
 
         <!-- 5. 依赖 bilibili-thrift-service-api 模块  -->
